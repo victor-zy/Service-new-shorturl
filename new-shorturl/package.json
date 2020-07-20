@@ -1,7 +1,7 @@
 {
-    "name": "simple",
+    "name": "new-shorturl",
     "version": "1.0.1",
-    "description": "基础的egg模板",
+    "description": "短链系统重构",
     "private": true,
     "egg": {
         "declarations": true

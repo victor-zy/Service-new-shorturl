@@ -1,0 +1,41 @@
+FROM node:10.15-alpine
+ 
+ 
+# MAINTAINER 指令就不要添加了，其一该指令在新版已弃用，其二首要确认人一般是找项目 owner
+#MAINTAINER xxx
+ 
+ENV TZ=Asia/Shanghai
+RUN set -ex \
+  && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
+  && apk add --no-cache tzdata curl coreutils
+ 
+ARG APP_INSTALL_DIR=/app/
+WORKDIR ${APP_INSTALL_DIR}
+ 
+# 设置 NODEJS 环境变量
+ARG NODE_ENV=production
+ENV NODE_ENV=$NODE_ENV
+ 
+# 拷贝应用源码到应用安装目录
+COPY ./ ./
+ 
+# 安装应用
+RUN ./docker-entrypoint.sh install
+ 
+EXPOSE 80
+ 
+# 应用启动
+CMD [ "./docker-entrypoint.sh", "start" ]
+ 
+# 应用停止
+#CMD [ "./docker-entrypoint.sh", "stop" ]
+ 
+# 应用健康检查配置
+HEALTHCHECK --interval=15s --timeout=1s --start-period=60s --retries=5 \
+  CMD curl -f http://localhost/health
+ 
+# --- 多应用项目，添加如下注释即可 ---
+#CMD [ "./docker-entrypoint.sh", "start", "subApp2" ]
+#CMD [ "./docker-entrypoint.sh", "stop", "subApp2" ]
+#HEALTHCHECK --interval=15s --timeout=1s --start-period=60s --retries=5 \
+#  CMD curl -f http://localhost/health

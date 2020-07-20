@@ -1,0 +1,66 @@
+{
+    "name": "simple",
+    "version": "1.0.1",
+    "description": "基础的egg模板",
+    "private": true,
+    "egg": {
+        "declarations": true
+    },
+    "dependencies": {
+        "@gaoding/egg-alinode": "^2.0.1",
+        "@gaoding/egg-apollo-client": "^1.3.2",
+        "@gaoding/egg-hlg-logger": "^1.0.22",
+        "@gaoding/egg-hlg-metrics": "^1.0.8",
+        "@gaoding/voilab-pdf-table": "^0.5.4",
+        "bull": "^3.13.0",
+        "dotenv-safe": "^8.2.0",
+        "egg": "^2.15.1",
+        "egg-etag": "^1.1.0",
+        "egg-oss": "^2.0.0",
+        "egg-redis": "^2.4.0",
+        "egg-router-plus": "^1.3.1",
+        "egg-scripts": "^2.11.0",
+        "egg-sequelize": "^5.2.1",
+        "egg-validate": "^2.0.2",
+        "lodash": "^4.17.15",
+        "moment": "^2.24.0",
+        "mysql2": "^2.1.0",
+        "pdfkit": "^0.11.0",
+        "sharp": "^0.25.2"
+    },
+    "devDependencies": {
+        "autod": "^3.0.1",
+        "autod-egg": "^1.1.0",
+        "egg-bin": "^4.11.0",
+        "egg-ci": "^1.11.0",
+        "egg-mock": "^3.21.0",
+        "eslint": "^5.13.0",
+        "eslint-config-egg": "^7.1.0"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "scripts": {
+        "start": "egg-scripts start --title=egg-server-rms --workers=2",
+        "stop": "egg-scripts stop --title=egg-server-rms",
+        "dev": "NODE_ENV=development EGG_SERVER_ENV=local egg-bin dev",
+        "debug": "egg-bin debug",
+        "test": "npm run lint -- --fix && npm run test-local",
+        "test-local": "egg-bin test",
+        "cov": "egg-bin cov",
+        "lint": "eslint .",
+        "ci": "npm run lint && npm run cov",
+        "autod": "autod",
+        "docker:build:dev": "docker build -t registry.cn-hangzhou.aliyuncs.com/gaodingx/rms:dev .",
+        "docker:push:dev": "docker push registry.cn-hangzhou.aliyuncs.com/gaodingx/rms:dev"
+    },
+    "ci": {
+        "version": "10"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "tunan<tunan@gaoding.com>",
+    "license": "MIT"
+}
